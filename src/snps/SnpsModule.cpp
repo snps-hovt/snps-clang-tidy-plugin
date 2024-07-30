@@ -1,0 +1,29 @@
+#include "clang-tidy/ClangTidyModule.h"
+#include "clang-tidy/ClangTidyModuleRegistry.h"
+#include "AvoidCurrentTimeCheck.h"
+
+namespace clang::tidy
+{
+namespace
+{
+class SnpsModule : public ClangTidyModule
+{
+public:
+    void addCheckFactories(ClangTidyCheckFactories& CheckFactories) override
+    {
+        CheckFactories.registerCheck<clang::tidy::snps::AvoidCurrentTimeCheck>("snps-avoid-current-time");
+    }
+};
+}  // unnamed namespace
+} // namespace clang::tidy
+
+namespace clang::tidy {
+
+// Register the module using this statically initialized variable.
+static ClangTidyModuleRegistry::Add<clang::tidy::SnpsModule> awesomePrefixCheckInit("snps-module",
+                                                                                       "Adds Synopsys custom checks.");
+
+// This anchor is used to force the linker to link in the generated object file and thus register the module.
+volatile int awesomePrefixCheckAnchorSource = 0;
+
+}  // namespace clang::tidy
