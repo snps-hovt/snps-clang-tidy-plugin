@@ -1,4 +1,4 @@
-// snps-avoid-current-time, misc-definitions-in-headers
+// snps-avoid-current-time
 //
 
 #include <time.h>
