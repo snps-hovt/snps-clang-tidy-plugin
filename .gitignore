@@ -3,6 +3,8 @@
 [R|r]elease*/
 [O|o]bj/
 
+.vscode/
+
 # Prerequisites
 *.d
 

@@ -39,7 +39,7 @@ bool isDateTimeFunctoin(const CallExpr* callExpr)
 
 void AvoidCurrentTimeCheck::registerMatchers(MatchFinder *Finder) {
   Finder->addMatcher(callExpr().bind("function_call"), this);
-  Finder->addMatcher(varDecl(hasName("time_t")).bind("time_t_decl"), this);
+  Finder->addMatcher(varDecl(hasType(asString("time_t"))).bind("time_t_decl"), this);
 }
 
 void AvoidCurrentTimeCheck::check(const MatchFinder::MatchResult &Result) {
