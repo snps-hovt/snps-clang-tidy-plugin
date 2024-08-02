@@ -30,6 +30,7 @@ set_if_not_defined(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_I
 
 enable_testing()
 find_package(LLVM 15...<16 REQUIRED CONFIG)
+find_package(Clang REQUIRED CONFIG)
 set_if_not_defined(CMAKE_CXX_STANDARD 20)
 
 
