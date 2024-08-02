@@ -24,7 +24,8 @@ jobs:
     - name: Install LLVM
       env:
         DEBIAN_FRONTEND: noninteractive
-      run: ./installClang15.sh
+      run: chmod a+x installClang15.sh
+        ./installClang15.sh
         sudo apt-get update
         sudo --preserve-env apt-get install --assume-yes \
             cmake \
