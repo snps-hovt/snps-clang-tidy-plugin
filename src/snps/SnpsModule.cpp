@@ -10,6 +10,7 @@ public:
     void addCheckFactories(ClangTidyCheckFactories& CheckFactories) override
     {
         CheckFactories.registerCheck<clang::tidy::snps::AvoidCurrentTimeCheck>("snps-avoid-current-time");
+        volatile int snpsCheckAnchorSource = 0;
     }
 };
 } // namespace clang::tidy::snps
