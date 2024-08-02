@@ -26,10 +26,13 @@ jobs:
         sudo apt-get install --assume-yes clang-15 clang-tidy-15 llvm-15 llvm-15-dev libclang-15-dev cmake; 
 
     - name: Configure CMake
+      env:
+          CC: clang-15
+          CXX: clang++-15
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.buildType}}
 
     - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{matrix.buildType}}
+      run: cmake --build ${{github.workspace}}/build --config ${{matrix.buildType}} -j 8
 
     - name: Test
       working-directory: ${{github.workspace}}/build
