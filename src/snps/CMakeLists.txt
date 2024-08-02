@@ -18,6 +18,11 @@ endif()
 
 set(CTEST_OUTPUT_ON_FAILURE TRUE)
 
+set_target_properties(snps-module PROPERTIES
+         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set_target_properties(snps-module PROPERTIES PREFIX "lib")
+set_target_properties(snps-module PROPERTIES OUTPUT_NAME "snps-module")
+set_target_properties(snps-module PROPERTIES SUFFIX ".so")
 set(CLANG_TIDY_SNPS_PLUGIN ${CMAKE_BINARY_DIR}/lib/libsnps-module.so)
 
 add_subdirectory(test)
