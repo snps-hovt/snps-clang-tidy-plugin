@@ -1,0 +1,30 @@
+add_library(snps-module MODULE "")
+target_compile_options(snps-module PRIVATE -fno-rtti)
+target_include_directories(snps-module
+    PRIVATE
+        ${CLANG_INCLUDE_DIRS}
+        ${LLVM_INCLUDE_DIRS}
+)
+target_sources(snps-module PRIVATE ${CMAKE_CURRENT_LIST_DIR}/SnpsModule.cpp)
+
+add_subdirectory(AvoidCurrentTime)
+
+# Locate the clang_tidy executable
+find_program(CLANG_TIDY_EXE NAMES clang-tidy PATHS ${LLVM_TOOLS_BINARY_DIR} NO_DEFAULT_PATH)
+
+if(NOT CLANG_TIDY_EXE)
+    message(FATAL_ERROR "clang-tidy not found")
+endif()
+
+message("CLANG_TIDY_EXE = " ${CLANG_TIDY_EXE})
+
+set(CTEST_OUTPUT_ON_FAILURE TRUE)
+
+set_target_properties(snps-module PROPERTIES
+         LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set_target_properties(snps-module PROPERTIES PREFIX "lib")
+set_target_properties(snps-module PROPERTIES OUTPUT_NAME "snps-module")
+set_target_properties(snps-module PROPERTIES SUFFIX ".so")
+set(CLANG_TIDY_SNPS_PLUGIN ${CMAKE_BINARY_DIR}/lib/libsnps-module.so)
+
+add_subdirectory(test)

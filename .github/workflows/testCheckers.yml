@@ -1,0 +1,37 @@
+name: Testing checkers
+
+on:
+    push:
+        branches: [ "main" ]
+    pull_request:
+        types: [opened, synchronize, reopened]
+        branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on:  ubuntu-24.04
+    
+    strategy:
+        matrix:
+            buildType: [
+                Release
+            ]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install LLVM
+      run: sudo apt update;
+        sudo apt-get install --assume-yes clang-15 clang-tidy-15 llvm-15 llvm-15-dev libclang-15-dev cmake libc++-15-dev libc++abi-15-dev; 
+
+    - name: Configure CMake
+      env:
+          CC: clang-15
+          CXX: clang++-15
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.buildType}} -DCMAKE_CXX_FLAGS="-stdlib=libc++"
+
+    - name: Build
+      env:
+          CC: clang-15
+          CXX: clang++-15
+      run: cmake --build ${{github.workspace}}/build --config ${{matrix.buildType}} -j 8

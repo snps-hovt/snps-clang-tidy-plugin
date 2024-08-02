@@ -1,3 +1,10 @@
+[B|b]uild*/
+[D|d]ebug*/
+[R|r]elease*/
+[O|o]bj/
+
+.vscode/
+
 # Prerequisites
 *.d
 
