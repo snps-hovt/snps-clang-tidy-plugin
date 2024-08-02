@@ -45,6 +45,9 @@ jobs:
     - name: List linked libraryes
       run: ldd build/lib/libsnps-module.so
 
+    - name: List symbols
+      run: nm -C build/lib/libsnps-module.so | grep ClangTidyCheck
+  
     - name: Test
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{matrix.buildType}} --output-on-failure
