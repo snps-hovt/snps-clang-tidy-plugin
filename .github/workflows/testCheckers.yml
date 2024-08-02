@@ -23,7 +23,7 @@ jobs:
 
     - name: Install LLVM
       run: sudo apt update;
-        sudo apt-get install --assume-yes clang-15 clang-tidy-15 llvm-15 llvm-15-dev libclang-15-dev cmake; 
+        sudo apt-get install --assume-yes clang-15 clang-tidy-15 llvm-15 llvm-15-dev libclang-15-dev cmake libc++-dev -lc++abi-dev; 
 
     - name: Configure CMake
       env:
