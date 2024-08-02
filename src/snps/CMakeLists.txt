@@ -16,6 +16,8 @@ if(NOT CLANG_TIDY_EXE)
     message(FATAL_ERROR "clang-tidy not found")
 endif()
 
+message("CLANG_TIDY_EXE = " ${CLANG_TIDY_EXE})
+
 set(CTEST_OUTPUT_ON_FAILURE TRUE)
 
 set_target_properties(snps-module PROPERTIES
