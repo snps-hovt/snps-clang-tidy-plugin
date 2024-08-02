@@ -1,0 +1,41 @@
+name: Testing checkers
+
+on:
+    push:
+        branches: [ "main" ]
+    pull_request:
+        types: [opened, synchronize, reopened]
+        branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on:  ubuntu-22.04
+    
+    strategy:
+        matrix:
+            buildType: [
+                Debug,
+                RelWithDebInfo,
+            ]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install LLVM
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: ./installClang16.sh
+        sudo apt-get update
+        sudo --preserve-env apt-get install --assume-yes \
+            cmake \
+            ninja-build
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.buildType}}
+
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{matrix.buildType}}
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build
+      run: ctest -C ${{matrix.buildType}}
