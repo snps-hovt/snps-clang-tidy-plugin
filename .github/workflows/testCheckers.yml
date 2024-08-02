@@ -14,8 +14,7 @@ jobs:
     strategy:
         matrix:
             buildType: [
-                Debug,
-                RelWithDebInfo,
+                Release
             ]
 
     steps:
