@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on:  ubuntu-22.04
+    runs-on:  ubuntu-24.04
     
     strategy:
         matrix:
@@ -28,8 +28,7 @@ jobs:
         ./installClang15.sh;
         sudo apt-get update;
         sudo --preserve-env apt-get install --assume-yes \
-            cmake \
-            ninja-build
+            cmake 
 
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.buildType}}
