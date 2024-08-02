@@ -32,13 +32,16 @@ jobs:
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.buildType}} -DCMAKE_CXX_FLAGS="-stdlib=libc++"
 
     - name: Build
+      env:
+          CC: clang-15
+          CXX: clang++-15
       run: cmake --build ${{github.workspace}}/build --config ${{matrix.buildType}} -j 8
 
     - name: Print compiler version
-      run: clang --version
+      run: clang-15 --version
 
-    - name: Print CMake configurations
-      run: cat build/CMakeCache.txt
+    - name: Print clang-tidy
+      run: /usr/lib/llvm-15/bin/clang-tidy --version
     
     - name: List linked libraryes
       run: ldd build/lib/libsnps-module.so
