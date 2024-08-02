@@ -18,6 +18,6 @@ endif()
 
 set(CTEST_OUTPUT_ON_FAILURE TRUE)
 
-set(CLANG_TIDY_SNPS_PLUGIN ${CMAKE_BINARY_DIR}/lib64/libsnps-module.so)
+set(CLANG_TIDY_SNPS_PLUGIN ${CMAKE_BINARY_DIR}/lib/libsnps-module.so)
 
 add_subdirectory(test)
