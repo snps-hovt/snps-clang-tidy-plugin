@@ -34,6 +34,15 @@ jobs:
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{matrix.buildType}} -j 8
 
+    - name: Print compiler version
+      run: clang --version
+
+    - name: Print CMake configurations
+      run: cat build/CMakeCache.txt
+    
+    - name: List linked libraryes
+      run: ldd build/lib/libsnps-module.so
+
     - name: Test
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{matrix.buildType}} --output-on-failure
