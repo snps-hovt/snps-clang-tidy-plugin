@@ -29,8 +29,7 @@ jobs:
       env:
           CC: clang-15
           CXX: clang++-15
-          CMAKE_CXX_FLAGS: "-stdlib=libc++"
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.buildType}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.buildType}} -DCMAKE_CXX_FLAGS="-stdlib=libc++"
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{matrix.buildType}} -j 8
