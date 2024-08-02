@@ -37,3 +37,10 @@ jobs:
     - name: Test
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{matrix.buildType}}
+    
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v4
+      with:
+        name: LastTest.log
+        path: build/Testing/Temporary/LastTest.log
+        retention-days: 5
