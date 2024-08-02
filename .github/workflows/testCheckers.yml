@@ -35,5 +35,4 @@ jobs:
       run: cmake --build ${{github.workspace}}/build --config ${{matrix.buildType}} -j 8
 
     - name: Test
-      working-directory: ${{github.workspace}}/build
-      run: ctest -C ${{matrix.buildType}} --output-on-failure
+      run: cd ${{github.workspace}}/build; ctest -C ${{matrix.buildType}} --output-on-failure
