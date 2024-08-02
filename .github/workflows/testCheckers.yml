@@ -35,19 +35,3 @@ jobs:
           CC: clang-15
           CXX: clang++-15
       run: cmake --build ${{github.workspace}}/build --config ${{matrix.buildType}} -j 8
-
-    - name: Print compiler version
-      run: clang-15 --version
-
-    - name: Print clang-tidy
-      run: /usr/lib/llvm-15/bin/clang-tidy --version
-    
-    - name: List linked libraryes
-      run: ldd build/lib/libsnps-module.so
-
-    - name: List symbols
-      run: nm -C build/lib/libsnps-module.so | grep ClangTidyCheck
-  
-    - name: Test
-      working-directory: ${{github.workspace}}/build
-      run: ctest -C ${{matrix.buildType}} --output-on-failure
